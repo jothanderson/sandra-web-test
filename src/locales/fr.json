@@ -1,0 +1,30 @@
+{
+  "navigation": {
+    "stories": "Histoires",
+    "map": "Carte",
+    "archive": "Archives",
+    "about": "Sandra",
+    "contact": "Contact"
+  },
+  "cta": {
+    "continue": "Continuez le fil...",
+    "exploreArchive": "Explorez toutes les histoires",
+    "discoverArchive": "Découvrez les archives"
+  },
+  "emotions": {
+    "despair": "Désespoir",
+    "survival": "Survie",
+    "resistance": "Résistance",
+    "dignity": "Dignité",
+    "hope": "Espoir",
+    "reflection": "Réflexion"
+  },
+  "themes": {
+    "women": "Femmes",
+    "migration": "Migration",
+    "humanRights": "Droits de l'Homme",
+    "childhood": "Enfance",
+    "health": "Santé",
+    "socialJustice": "Justice Sociale"
+  }
+}
