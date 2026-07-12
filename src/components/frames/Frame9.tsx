@@ -40,17 +40,22 @@ export default function Frame9_TheRevelation() {
     );
 
     // Fade up final CTAs
-    gsap.from(contentRef.current, {
-      y: 100,
-      opacity: 0,
-      duration: 1.5,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'center center',
-        toggleActions: 'play none none reverse',
+    // Using fromTo instead of from to avoid production hydration/FOUC bugs
+    // Adjusting start trigger to 'top 75%' so it fires reliably when entering the final section
+    gsap.fromTo(contentRef.current, 
+      { y: 100, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        }
       }
-    });
+    );
   }, { scope: container });
 
   return (
