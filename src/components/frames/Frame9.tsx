@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame9_TheRevelation() {
   const container = useRef<HTMLDivElement>(null);
@@ -69,7 +70,8 @@ export default function Frame9_TheRevelation() {
         flexDirection: 'column',
         justifyContent: 'flex-end',
         paddingBottom: 'var(--spacing-xl)',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        zIndex: 10
       }}
     >
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
@@ -86,6 +88,8 @@ export default function Frame9_TheRevelation() {
         <div ref={illuminationRef} style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-color), rgba(255,255,255,0) 60%)' }} />
       </div>
+
+      <RedThread d="M 90 0 L 90 90 Q 90 95 85 95 L 50 95 Q 45 95 45 100" strokeWidth={1} color="var(--color-red)" style={{ zIndex: 3 }} />
       
       <div ref={contentRef} className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <h2 style={{ marginBottom: 'var(--spacing-lg)' }}>Keep following the thread</h2>

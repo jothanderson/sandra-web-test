@@ -1,9 +1,10 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame5_Darkroom() {
   const container = useRef<HTMLDivElement>(null);
@@ -11,6 +12,7 @@ export default function Frame5_Darkroom() {
   const img2Ref = useRef<HTMLDivElement>(null);
   const img3Ref = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -46,6 +48,7 @@ export default function Frame5_Darkroom() {
     // Hold slightly before transitioning
     .to({}, { duration: 0.5 });
 
+    setTimeline(tl);
   }, { scope: container });
 
   return (
@@ -55,15 +58,20 @@ export default function Frame5_Darkroom() {
         position: 'relative', 
         height: '100vh',
         width: '100%',
-        backgroundColor: '#111111',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: 'var(--spacing-xl) 0',
+        backgroundColor: 'var(--color-black)',
+        zIndex: 10,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
         overflow: 'hidden'
       }}
     >
+      <RedThread d="M 95 0 L 95 5 Q 95 10 90 10 L 55 10 Q 50 10 50 15 L 50 65 Q 50 70 45 70 L 15 70 Q 10 70 10 75 L 10 100" strokeWidth={1} color="var(--color-red)" timeline={timeline} style={{ zIndex: 4 }} />
+
       <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '1600px', margin: '0 auto' }}>
-        
+
         {/* Dedicated Editorial Text Zone (Top Center, no image overlap) */}
         <div 
           ref={textRef} 

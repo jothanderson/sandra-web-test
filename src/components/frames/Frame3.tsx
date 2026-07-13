@@ -1,13 +1,15 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame3_BeingThere() {
   const container = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
     // Pinned observer section
@@ -28,6 +30,7 @@ export default function Frame3_BeingThere() {
     )
     .to(textRef.current, { y: -50, opacity: 0, scale: 1.05, duration: 1, ease: 'power2.in' }, '+=1');
 
+    setTimeline(tl);
   }, { scope: container });
 
   return (
@@ -40,7 +43,9 @@ export default function Frame3_BeingThere() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: 'var(--bg-color)',
+        zIndex: 10
       }}
     >
       {/* Background Image Wrapper */}
@@ -55,6 +60,8 @@ export default function Frame3_BeingThere() {
         {/* Dark Overlay for text readability */}
         <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)' }} />
       </div>
+
+      <RedThread d="M 95 0 L 95 80 Q 95 85 90 85 L 20 85 Q 15 85 15 90 L 15 100" strokeWidth={1} color="var(--color-red)" timeline={timeline} style={{ zIndex: 3 }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div ref={textRef} style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', color: 'var(--color-white)' }}>

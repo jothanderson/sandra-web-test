@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame7_LivingStoriesNetwork() {
   const container = useRef<HTMLDivElement>(null);
@@ -40,8 +41,9 @@ export default function Frame7_LivingStoriesNetwork() {
 
     // Subtle floating parallax for the nodes to give a "living" feel
     circlesRef.current.forEach((el, index) => {
+      // Parallax on scroll
       gsap.to(el, {
-        yPercent: index % 2 === 0 ? -10 : 15, // Alternate float direction
+        yPercent: index % 2 === 0 ? -10 : 15,
         ease: 'none',
         scrollTrigger: {
           trigger: container.current,
@@ -49,6 +51,16 @@ export default function Frame7_LivingStoriesNetwork() {
           end: 'bottom top',
           scrub: true,
         }
+      });
+      
+      // Continuous breathing animation
+      gsap.to(el, {
+        y: '+=20',
+        duration: 2.5 + index * 0.5,
+        yoyo: true,
+        repeat: -1,
+        ease: 'sine.inOut',
+        delay: index * 0.3
       });
     });
 
@@ -58,19 +70,33 @@ export default function Frame7_LivingStoriesNetwork() {
     circlesRef.current[index] = el;
   };
 
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    gsap.to(e.currentTarget, { scale: 1.05, filter: 'brightness(1.1)', duration: 0.4, ease: 'power2.out' });
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    gsap.to(e.currentTarget, { scale: 1, filter: 'brightness(1)', duration: 0.4, ease: 'power2.out' });
+  };
+
   return (
     <section 
       ref={container}
       style={{ 
         position: 'relative', 
-        minHeight: '130vh', // Extended to allow plenty of breathing room
+        minHeight: '130vh',
         width: '100%',
-        backgroundColor: 'var(--color-white)',
-        color: 'var(--color-black)',
+        backgroundColor: 'var(--bg-color)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 'var(--spacing-xl) 0',
         overflow: 'hidden',
-        padding: 'var(--spacing-xl) 0'
+        zIndex: 10
       }}
     >
+      <RedThread d="M 50 0 C 50 30, 45 50, 50 70 S 55 90, 50 100" strokeWidth={1} color="var(--color-red)" style={{ zIndex: 3 }} />
+
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <h2 style={{ textAlign: 'center', marginBottom: 'var(--spacing-xl)' }}>
           The Living Stories Network
@@ -85,7 +111,9 @@ export default function Frame7_LivingStoriesNetwork() {
         
         {/* Left Node - Large */}
         <div 
-          ref={setCircleRef(0)} 
+          ref={setCircleRef(0)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           style={{ 
             position: 'absolute', 
             top: '10%', 
@@ -93,14 +121,18 @@ export default function Frame7_LivingStoriesNetwork() {
             width: '35vw', 
             height: '35vw',
             borderRadius: '50%',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            cursor: 'pointer',
+            zIndex: 2
           }}
         >
           <Image src="/photos/SRILANKA_01.jpg" alt="Sri Lanka Story" fill sizes="35vw" style={{ objectFit: 'cover' }} />
         </div>
 
         <div 
-          ref={setCircleRef(1)} 
+          ref={setCircleRef(1)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           style={{ 
             position: 'absolute', 
             top: '55%', 
@@ -109,6 +141,7 @@ export default function Frame7_LivingStoriesNetwork() {
             height: '25vw',
             borderRadius: '50%',
             overflow: 'hidden',
+            cursor: 'pointer',
             zIndex: 3
           }}
         >
@@ -117,7 +150,9 @@ export default function Frame7_LivingStoriesNetwork() {
 
         {/* Right Node - Very Large */}
         <div 
-          ref={setCircleRef(2)} 
+          ref={setCircleRef(2)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           style={{ 
             position: 'absolute', 
             top: '0%', 
@@ -125,7 +160,9 @@ export default function Frame7_LivingStoriesNetwork() {
             width: '40vw', 
             height: '40vw',
             borderRadius: '50%',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            cursor: 'pointer',
+            zIndex: 2
           }}
         >
           <Image src="/photos/SRILANKA_03.jpg" alt="Sri Lanka Network" fill sizes="40vw" style={{ objectFit: 'cover' }} />

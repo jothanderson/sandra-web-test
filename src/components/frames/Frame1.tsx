@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import RedThread from '../RedThread';
 
 export default function Frame1_Question() {
   return (
@@ -30,7 +31,7 @@ export default function Frame1_Question() {
         </h1>
       </div>
 
-      <div className="red-thread-placeholder" style={{ bottom: 0, height: '30vh' }}></div>
+      <RedThread d="M 95 30 L 95 80 Q 95 85 90 85 L 55 85 Q 50 85 50 90 L 50 100" strokeWidth={1} color="var(--color-red)" style={{ zIndex: 3 }} />
     </section>
   );
 }

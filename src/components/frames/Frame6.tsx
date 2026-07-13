@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame6_EveryPhotoIsAStory() {
   const container = useRef<HTMLDivElement>(null);
@@ -70,10 +71,14 @@ export default function Frame6_EveryPhotoIsAStory() {
         minHeight: '200vh',
         width: '100%',
         paddingTop: 'var(--spacing-xl)',
-        paddingBottom: 'var(--spacing-xl)'
+        paddingBottom: 'var(--spacing-xl)',
+        backgroundColor: 'var(--bg-color)',
+        zIndex: 10
       }}
     >
-      <div className="container">
+      <RedThread d="M 10 0 L 10 70 Q 10 75 15 75 L 45 75 Q 50 75 50 80 L 50 100" strokeWidth={1} color="var(--color-red)" style={{ zIndex: 3 }} />
+
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <h2 ref={titleRef} style={{ textAlign: 'center', marginBottom: 'var(--spacing-xl)' }}>
           Every photo is a story
         </h2>

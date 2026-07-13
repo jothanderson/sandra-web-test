@@ -1,13 +1,15 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame2_HumanStories() {
-  const container = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLElement>(null);
   const imageWrapper = useRef<HTMLDivElement>(null);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
     // Pin the section to allow the image to travel across the frame
@@ -32,6 +34,7 @@ export default function Frame2_HumanStories() {
       ease: 'none'
     });
 
+    setTimeline(tl);
   }, { scope: container });
 
   return (
@@ -44,9 +47,22 @@ export default function Frame2_HumanStories() {
         display: 'flex',
         alignItems: 'center',
         padding: 'var(--spacing-xl) 0',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundColor: 'var(--bg-color)',
+        zIndex: 10
       }}
     >
+      {/* Background Image */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.25 }}>
+        <img 
+          src="/photos/sandra-photo-behind-wall.png" 
+          alt="Background - Sandra behind wall" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </div>
+
+      <RedThread d="M 50 0 L 50 15 Q 50 20 45 20 L 10 20 Q 5 20 5 25 L 5 90 Q 5 95 10 95 L 90 95 Q 95 95 95 100" strokeWidth={1} color="var(--color-red)" timeline={timeline} style={{ zIndex: 3 }} />
+
       <div className="container" style={{ position: 'absolute', top: '10vh', left: 0, zIndex: 2, display: 'flex', flexDirection: 'column', gap: 'var(--spacing-lg)' }}>
         <div style={{ maxWidth: '600px' }}>
           <h2 style={{ marginBottom: 'var(--spacing-md)' }}>Human Stories</h2>

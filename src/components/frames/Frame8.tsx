@@ -1,14 +1,16 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import RedThread from '../RedThread';
 
 export default function Frame8_WhoFollowsTheThread() {
   const container = useRef<HTMLDivElement>(null);
   const textCol = useRef<HTMLDivElement>(null);
   const sandraImage = useRef<HTMLDivElement>(null);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -42,6 +44,7 @@ export default function Frame8_WhoFollowsTheThread() {
     // 3. Hold for reading
     .to({}, { duration: 1 });
 
+    setTimeline(tl);
   }, { scope: container });
 
   return (
@@ -49,15 +52,19 @@ export default function Frame8_WhoFollowsTheThread() {
       ref={container}
       style={{ 
         position: 'relative', 
-        height: '100vh',
+        minHeight: '100vh',
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden'
+        padding: 'var(--spacing-xl) 0',
+        overflow: 'hidden',
+        backgroundColor: 'var(--bg-color)',
+        zIndex: 10
       }}
     >
-      <div className="container" style={{ display: 'flex', gap: 'var(--spacing-lg)', alignItems: 'center', width: '100%' }}>
+      <RedThread d="M 50 0 L 50 5 Q 50 10 45 10 L 30 10 Q 25 10 25 15 L 25 80 Q 25 85 30 85 L 85 85 Q 90 85 90 90 L 90 100" strokeWidth={1} color="var(--color-red)" timeline={timeline} style={{ zIndex: 3 }} />
+
+      <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', gap: 'var(--spacing-lg)', alignItems: 'center', width: '100%' }}>
         <div ref={textCol} style={{ flex: 1, opacity: 0 }}>
           <h2 style={{ marginBottom: 'var(--spacing-md)' }}>Who follows the thread?</h2>
           <p>

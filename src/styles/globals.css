@@ -95,22 +95,7 @@ p {
   text-align: center;
 }
 
-/* Red Thread Placeholder */
-.red-thread-placeholder {
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  background-color: var(--color-red);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
 
-.red-thread-horizontal {
-  height: 2px;
-  width: 100%;
-  background-color: var(--color-red);
-}
 
 /* Base image styling */
 img {
