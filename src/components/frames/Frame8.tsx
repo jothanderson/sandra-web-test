@@ -23,12 +23,12 @@ export default function Frame8_WhoFollowsTheThread() {
       }
     });
 
-    // 1. Slow gradual reveal of Sandra
+    // 1. Slow gradual reveal of Sandra background
     tl.fromTo(sandraImage.current, 
-      { filter: 'blur(30px)', opacity: 0, scale: 1.15, yPercent: 10 },
+      { filter: 'blur(30px)', opacity: 0, scale: 1.15, yPercent: 5 },
       { 
         filter: 'blur(0px)', 
-        opacity: 1, 
+        opacity: 0.28, // Soft cinematic background opacity
         scale: 1, 
         yPercent: 0,
         duration: 3, 
@@ -62,27 +62,41 @@ export default function Frame8_WhoFollowsTheThread() {
         zIndex: 10
       }}
     >
+      {/* Background Image */}
+      <div 
+        ref={sandraImage} 
+        style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          zIndex: 0, 
+          opacity: 0,
+          willChange: 'transform, filter, opacity'
+        }}
+      >
+        <img 
+          src="/photos/sandra-photo-Paris-frame-8.png" 
+          alt="Background - Sandra in Paris" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </div>
+
       <RedThread d="M 50 0 L 50 5 Q 50 10 45 10 L 30 10 Q 25 10 25 15 L 25 80 Q 25 85 30 85 L 85 85 Q 90 85 90 90 L 90 100" strokeWidth={1} color="var(--color-red)" timeline={timeline} style={{ zIndex: 3 }} />
 
-      <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', gap: 'var(--spacing-lg)', alignItems: 'center', width: '100%' }}>
-        <div ref={textCol} style={{ flex: 1, opacity: 0 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', width: '100%' }}>
+        <div ref={textCol} style={{ maxWidth: '650px', opacity: 0 }}>
           <h2 style={{ marginBottom: 'var(--spacing-md)' }}>Who follows the thread?</h2>
-          <p>
-            Sandra Jabalera is a listener, an observer, and a connector of stories. 
-            Through her lens, she captures not just images, but the invisible red thread 
-            that ties human dignity, resistance, and hope together across the world.
+          <h3 style={{ fontSize: '2rem', fontWeight: 600, marginBottom: 'var(--spacing-xs)', fontFamily: 'var(--font-sans)', color: 'var(--text-color)' }}>Sandra Jabalera</h3>
+          <p style={{ fontSize: '1.125rem', fontWeight: 500, color: 'var(--color-red)', marginBottom: 'var(--spacing-md)' }}>Periodista y fotógrafa independiente.</p>
+          <p style={{ fontSize: '1.25rem', marginBottom: 'var(--spacing-md)', lineHeight: '1.6', fontWeight: 300 }}>
+            Escucha, observa y conecta historias<br />
+            que necesitan ser contadas.
           </p>
-        </div>
-        <div style={{ flex: 1, position: 'relative', height: '80vh', overflow: 'hidden' }}>
-          <div ref={sandraImage} style={{ position: 'absolute', inset: 0 }}>
-            <Image 
-              src="/photos/PARIS_01.jpg" 
-              alt="Connection - Paris" 
-              fill 
-              sizes="50vw"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
+          <p style={{ fontSize: '1.25rem', lineHeight: '1.6', fontWeight: 300 }}>
+            Su compromiso es amplificar<br />
+            voces y generar conciencia<br />
+            para construir un mundo<br />
+            más justo y humano.
+          </p>
         </div>
       </div>
     </section>

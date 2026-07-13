@@ -76,12 +76,10 @@ export default function Frame9_TheRevelation() {
     >
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <div ref={bgRef} style={{ position: 'absolute', top: '-10%', left: 0, width: '100%', height: '120%' }}>
-          <Image 
-            src="/photos/PARIS_02.jpg" 
+          <img 
+            src="/photos/sandra-photo-Hilo-rojo-frame-9.png" 
             alt="The Revelation - Paris" 
-            fill 
-            sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'top center' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
           />
         </div>
         {/* Illumination overlay that fades out to reveal the bright Paris image completely */}
@@ -94,11 +92,54 @@ export default function Frame9_TheRevelation() {
       <div ref={contentRef} className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <h2 style={{ marginBottom: 'var(--spacing-lg)' }}>Keep following the thread</h2>
         
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--spacing-md)' }}>
-          <button style={{ padding: '1rem 2rem', backgroundColor: 'var(--color-red)', color: 'white', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--spacing-md)', paddingBottom: '2rem' }}>
+          <button style={{ 
+            padding: '1rem 2.5rem', 
+            backgroundColor: 'var(--color-red)', 
+            color: 'white', 
+            border: 'none', 
+            borderRadius: '50px',
+            fontWeight: 500,
+            boxShadow: '0 4px 15px rgba(211, 47, 47, 0.4)',
+            cursor: 'pointer', 
+            fontFamily: 'var(--font-sans)', 
+            fontSize: '1rem',
+            transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-3px)';
+            e.currentTarget.style.boxShadow = '0 6px 20px rgba(211, 47, 47, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 15px rgba(211, 47, 47, 0.4)';
+          }}
+          >
             Explore the Map
           </button>
-          <button style={{ padding: '1rem 2rem', backgroundColor: 'transparent', color: 'var(--text-color)', border: '1px solid var(--text-color)', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontSize: '1rem' }}>
+          <button style={{ 
+            padding: '1rem 2.5rem', 
+            backgroundColor: 'transparent', 
+            color: 'var(--text-color)', 
+            border: '2px solid var(--text-color)', 
+            borderRadius: '50px',
+            fontWeight: 500,
+            cursor: 'pointer', 
+            fontFamily: 'var(--font-sans)', 
+            fontSize: '1rem',
+            transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-3px)';
+            e.currentTarget.style.backgroundColor = 'var(--text-color)';
+            e.currentTarget.style.color = 'var(--bg-color)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = 'var(--text-color)';
+          }}
+          >
             Discover the Archive
           </button>
         </div>
