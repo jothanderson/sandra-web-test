@@ -337,11 +337,11 @@ img {
 .frame9-content {
   position: relative; 
   z-index: 2; 
-  text-align: right;
+  text-align: right !important;
 }
 .frame9-button-group {
-  display: flex; 
-  justify-content: flex-end; 
+  display: flex !important; 
+  justify-content: flex-end !important; 
   gap: var(--spacing-md); 
   padding-bottom: 2rem;
 }
@@ -459,10 +459,10 @@ img {
 
   /* Frame 9 */
   .frame9-content {
-    text-align: center;
+    text-align: center !important;
   }
   .frame9-button-group {
-    justify-content: center;
+    justify-content: center !important;
   }
 }
 
