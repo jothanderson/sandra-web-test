@@ -89,10 +89,10 @@ export default function Frame9_TheRevelation() {
 
       <RedThread d="M 90 0 L 90 90 Q 90 95 85 95 L 50 95 Q 45 95 45 100" strokeWidth={1} color="var(--color-red)" style={{ zIndex: 3 }} />
       
-      <div ref={contentRef} className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+      <div ref={contentRef} className="container frame9-content">
         <h2 style={{ marginBottom: 'var(--spacing-lg)' }}>Keep following the thread</h2>
         
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--spacing-md)', paddingBottom: '2rem' }}>
+        <div className="frame9-button-group">
           <button style={{ 
             padding: '1rem 2.5rem', 
             backgroundColor: 'var(--color-red)', 

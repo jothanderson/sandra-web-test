@@ -12,25 +12,58 @@ export default function Frame3_BeingThere() {
   const [timeline, setTimeline] = useState<gsap.core.Timeline | null>(null);
 
   useGSAP(() => {
-    // Pinned observer section
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'top top',
-        end: '+=100%',
-        pin: true,
-        scrub: true,
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 768px) and (min-height: 600px)",
+      isMobile: "(max-width: 767px), (max-height: 599px)"
+    }, (context) => {
+      const { isDesktop } = context.conditions as { isDesktop: boolean };
+
+      if (isDesktop) {
+        // Pinned observer section for desktop
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container.current,
+            start: 'top top',
+            end: '+=100%',
+            pin: true,
+            scrub: true,
+          }
+        });
+
+        // Fade up and scale text while pinned
+        tl.fromTo(textRef.current, 
+          { y: 50, opacity: 0, scale: 0.95 },
+          { y: 0, opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }
+        )
+        .to(textRef.current, { y: -50, opacity: 0, scale: 1.05, duration: 1, ease: 'power2.in' }, '+=1');
+
+        setTimeline(tl);
+      } else {
+        // Mobile: Simple scroll reveal
+        gsap.fromTo(textRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            scrollTrigger: {
+              trigger: container.current,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              scrub: true,
+            }
+          }
+        );
+
+        setTimeline(null);
       }
     });
 
-    // Fade up and scale text while pinned
-    tl.fromTo(textRef.current, 
-      { y: 50, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }
-    )
-    .to(textRef.current, { y: -50, opacity: 0, scale: 1.05, duration: 1, ease: 'power2.in' }, '+=1');
-
-    setTimeline(tl);
+    return () => {
+      setTimeline(null);
+    };
   }, { scope: container });
 
   return (
